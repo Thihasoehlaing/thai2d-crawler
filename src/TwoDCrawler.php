@@ -2,6 +2,8 @@
 
 namespace Thihasoehlaing\TwoDCrawler;
 use Carbon\Carbon;
+use DOMDocument;
+use DOMXPath;
 
 class TwoDCrawler
 {
