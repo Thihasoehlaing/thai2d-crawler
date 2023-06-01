@@ -1,4 +1,4 @@
-[![Tests](https://github.com/Thihasoehlaing/thai2d-crawler/actions/workflows/run-tests-pest.yml/badge.svg)](https://github.com/Thihasoehlaing/thai2d-crawler/actions/workflows/run-tests-pest.yml)
+[![PHP Composer](https://github.com/Thihasoehlaing/thai2d-crawler/actions/workflows/php.yml/badge.svg)](https://github.com/Thihasoehlaing/thai2d-crawler/actions/workflows/php.yml)
 
 # Thai 2D Crawler
 
