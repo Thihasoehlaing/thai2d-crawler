@@ -9,7 +9,9 @@ use DOMXPath;
 class TwoDCrawler
 {
     protected $set;
+
     protected $value;
+
     protected $time;
 
     public function __construct()
@@ -32,7 +34,7 @@ class TwoDCrawler
         $first = substr($this->set, -1);
         $last_raw_2 = explode('.', $this->value);
         $last = substr($last_raw_2[0], -1);
-        $number = $first . $last;
+        $number = $first.$last;
 
         return $number;
     }
@@ -44,9 +46,9 @@ class TwoDCrawler
 
     private function getDataFromSite(): array
     {
-        $site = file_get_contents("https://www.set.or.th/en/market/product/stock/overview");
+        $site = file_get_contents('https://www.set.or.th/en/market/product/stock/overview');
         preg_match('/Last Update (\d{2} [A-Za-z]{3} \d{4} \d{2}:\d{2}:\d{2})/', $site, $LastUpdateMatche);
-        if($LastUpdateMatche) {
+        if ($LastUpdateMatche) {
             $dom = new DOMDocument();
             libxml_use_internal_errors(true); // Disable error reporting for malformed HTML
             $dom->loadHTML($site);
@@ -74,7 +76,7 @@ class TwoDCrawler
                                 $value = trim($td8->item(0)->nodeValue);
 
                                 $currentYear = date('Y');
-                                $array = explode($currentYear ." ", $LastUpdateMatche[1]);
+                                $array = explode($currentYear.' ', $LastUpdateMatche[1]);
                                 $bangkokTime = $array[1];
                                 $carbonBangkok = Carbon::createFromFormat('H:i:s', $bangkokTime, 'Asia/Bangkok');
                                 $carbonRangoon = $carbonBangkok->copy()->setTimezone('Asia/Rangoon');
