@@ -21,6 +21,7 @@ $crawler->getSet(); // "1,685.75"
 $crawler->getValue(); // "63,797.02"
 $crawler->getNumber(); // "57"
 $crawler->getTime(); // "13:49:07"
+$crawler->getStatus(); // "Closed"
 ```
 
 ## Testing

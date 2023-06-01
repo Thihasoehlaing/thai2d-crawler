@@ -6,4 +6,5 @@ it('can crawl', function () {
     expect($crawler->getValue())->toBeString();
     expect($crawler->getNumber())->toBeString();
     expect($crawler->getTime())->toBeString();
+    expect($crawler->getStatus())->toBeString();
 });

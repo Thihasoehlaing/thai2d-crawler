@@ -14,9 +14,11 @@ class TwoDCrawler
 
     protected $time;
 
+    protected $status;
+
     public function __construct()
     {
-        [$this->set, $this->value, $this->time] = $this->getDataFromSite();
+        [$this->set, $this->value, $this->time, $this->status] = $this->getDataFromSite();
     }
 
     public function getSet(): string
@@ -44,6 +46,11 @@ class TwoDCrawler
         return $this->time;
     }
 
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
     private function getDataFromSite(): array
     {
         $site = file_get_contents('https://www.set.or.th/en/market/product/stock/overview');
@@ -55,7 +62,11 @@ class TwoDCrawler
             libxml_use_internal_errors(false); // Enable error reporting
 
             $xpath = new DOMXPath($dom);
-
+            $status = '--';
+            $statusElement = $xpath->query('//small[contains(@class, "text-end") and contains(text(), "Market Status :")]')->item(0);
+            if ($statusElement) {
+                $status = trim(str_replace('Market Status :', '', $statusElement->nodeValue));
+            }
             $div = $xpath->query('//div[@no-collapse][contains(concat(" ", normalize-space(@class), " "), " table-index-overview ")]');
 
             if ($div->length > 0) {
@@ -82,7 +93,7 @@ class TwoDCrawler
                                 $carbonRangoon = $carbonBangkok->copy()->setTimezone('Asia/Rangoon');
                                 $time = $carbonRangoon->format('H:i:s');
 
-                                return [$set, $value, $time];
+                                return [$set, $value, $time, $status];
                             }
                         }
                     }
