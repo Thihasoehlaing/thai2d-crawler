@@ -4,5 +4,5 @@ use Thihasoehlaing\TwoDCrawler\TwoDCrawler;
 
 function crawler()
 {
-    return new TwoDCrawler;
+    return new TwoDCrawler();
 }
